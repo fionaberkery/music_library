@@ -27,8 +27,10 @@ def select(id):
     album = None;
     sql = "SELECT * FROM albums WHERE id=%s"
     values = [id]
-    result = run_sql(sql, values)[0]
-    if result is not None:
+    results = run_sql(sql, values)
+
+    if results:
+        result = results[0]
         artist = artist_repository.select(result['artist_id'])
         album = Album(result['title'], result['genre'], artist, result['id'])
     return album
